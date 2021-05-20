@@ -19,7 +19,7 @@ class RegisterController extends Controller
 
         $user->fill($request->all());
         $user->password = Hash::make($request->password);
-        $user->slug = Str::slug($request->name);
+        $user->slug = Str::slug($request->name, '-');
 
         if($request->gender == 'Nam')
             $user->avatar = Status::APP . '/default/male.png';
@@ -35,4 +35,5 @@ class RegisterController extends Controller
             'token' => $user->token,
         ]);
     }
+
 }

@@ -1,27 +1,68 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Category\CategoryController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-Route::group(['middleware', 'guest'], function() {
+Route::group([], function() {
+
+    /**********
+    *****
+    ***CHUYÊN MỤC
+    *****
+    **********/
+
+        // Tất cả chuyên mục
+        Route::get('/category', [CategoryController::class, 'index']);
+
+        // Một chuyên mục
+        Route::get('/category/{category}', [CategoryController::class, 'show']);
+
+    
+});
+
+Route::group(['middleware' => 'guest'], function() {
 
     // Đăng ký
-    Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@index')
+    Route::post('/register', [RegisterController::class, 'index'])
         ->name('register');
 
     // Đăng nhập
-    Route::post('/login', 'App\Http\Controllers\Auth\LoginController@index')
+    Route::post('/login', [LoginController::class, 'index'])
         ->name('login');
 
+
+});
+
+
+Route::group(['middleware' => 'auth:api'], function() {
+
+    // Đăng xuất
+    Route::post('/logout', [LogoutController::class, 'index'])
+        ->name('logout');
+
+    /**********
+    *****
+    ***CHUYÊN MỤC
+    *****
+    **********/
+
+        // Thêm, sửa, ẩn
+        Route::resource('/category', CategoryController::class)
+            ->except(['index', 'show', 'create', 'edit']);
+
+        // Khôi phục
+        Route::post('/category/restore/{id}', [CategoryController::class, 'restore'])
+            ->name('category.restore');
+
+        // Xóa vĩnh viễn
+        Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])
+            ->name('category.delete');
+
+        // Thùng rác
+        Route::get('/trash/category/', [CategoryController::class, 'trash'])
+            ->name('category.trash');
 });
