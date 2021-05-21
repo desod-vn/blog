@@ -59,7 +59,7 @@ Route::group(['middleware' => 'auth:api'], function() {
             ->name('category.restore');
 
         // Xóa vĩnh viễn
-        Route::delete('/category/delete/{id}', [CategoryController::class, 'delete'])
+        Route::delete('/category/delete/{id}', [CategoryController::class, 'forceDelete'])
             ->name('category.delete');
 
         // Thùng rác
