@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Policies\CategoryPolicy;
 use App\Http\Requests\Category\CreateRequest;
 use App\Http\Requests\Category\UpdateRequest;
 
@@ -84,53 +83,4 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function restore($id)
-    {
-        $this->authorize('restore', Category::class);
-
-        $category = Category::onlyTrashed()
-            ->where('id', $id)
-            ->restore();
-        
-        if($category)
-        {
-            return response()->json([
-                'status' => Status::SUCCESS,
-            ]);
-        }
-
-        return response()->json([
-            'status' => Status::FAILURE,
-        ]);
-    }
-
-    public function forceDelete($id)
-    {
-        $this->authorize('forceDelete', Category::class);
-
-        $category = Category::onlyTrashed()
-            ->where('id', $id)
-            ->forceDelete();
-        
-        if($category)
-        {
-            return response()->json([
-                'status' => Status::SUCCESS,
-            ]);
-        }
-
-        return response()->json([
-            'status' => Status::FAILURE,
-        ]);
-    }
-
-    public function trash()
-    {
-        $trash = Category::onlyTrashed()->get();
-
-        return response()->json([
-            'status' => Status::SUCCESS,
-            'data' => $trash,
-        ]);
-    }
 }

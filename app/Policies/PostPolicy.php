@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Category;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CategoryPolicy
+class PostPolicy
 {
     use HandlesAuthorization;
 
@@ -29,7 +29,7 @@ class CategoryPolicy
 
 
 
-    public function view(User $user, Category $category)
+    public function view(User $user, Post $category)
     {
         return true;
     }
@@ -38,33 +38,33 @@ class CategoryPolicy
 
     public function create(User $user)
     {
-        return false;
+        return $user->role === 'author';
     }
 
 
 
-    public function update(User $user, Category $category)
+    public function update(User $user, Post $post)
+    {
+        return $user->id === $post->user_id;
+    }
+
+
+
+    public function delete(User $user, Post $post)
     {
         return false;
     }
 
 
 
-    public function delete(User $user, Category $category)
+    public function restore(User $user, Post $post)
     {
         return false;
     }
 
 
 
-    public function restore(User $user, Category $category)
-    {
-        return false;
-    }
-
-
-
-    public function forceDelete(User $user, Category $category)
+    public function forceDelete(User $user, Post $post)
     {
         return false;
     }
