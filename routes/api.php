@@ -4,7 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Post\PostController;
+
+
 
 
 Route::group([], function() {
@@ -20,6 +24,18 @@ Route::group([], function() {
 
         // Một chuyên mục
         Route::get('/category/{category}', [CategoryController::class, 'show']);
+    
+    /**********
+    *****
+    ***BÀI VIẾT
+    *****
+    **********/
+
+        // Tất cả bài viết
+        Route::get('/post', [PostController::class, 'index']);
+
+        // Một bài viết
+        Route::get('/post/{post}', [PostController::class, 'show']);
 
     
 });
@@ -46,23 +62,51 @@ Route::group(['middleware' => 'auth:api'], function() {
 
     /**********
     *****
+    ***QUẢN LÝ
+    *****
+    **********/
+
+        /**********
+        *****
+        ***THÙNG RÁC
+        *****
+        **********/
+
+            // Xem
+            Route::get('/trash', [DashboardController::class, 'index'])
+                ->name('trash.view');
+
+            // Khôi phục
+            Route::post('/trash/restore/{id}', [DashboardController::class, 'restore'])
+                ->name('trash.restore');
+
+            // Xóa vĩnh viễn
+            Route::delete('/trash/delete/{id}', [DashboardController::class, 'forceDelete'])
+                ->name('trash.delete');
+
+
+
+    /**********
+    *****
     ***CHUYÊN MỤC
     *****
     **********/
 
-        // Thêm, sửa, ẩn
+        // Thêm, sửa, xóa
         Route::resource('/category', CategoryController::class)
             ->except(['index', 'show', 'create', 'edit']);
 
-        // Khôi phục
-        Route::post('/category/restore/{id}', [CategoryController::class, 'restore'])
-            ->name('category.restore');
+    /**********
+    *****
+    ***BÀI VIẾT
+    *****
+    **********/
 
-        // Xóa vĩnh viễn
-        Route::delete('/category/delete/{id}', [CategoryController::class, 'forceDelete'])
-            ->name('category.delete');
-
-        // Thùng rác
-        Route::get('/trash/category/', [CategoryController::class, 'trash'])
-            ->name('category.trash');
+        // Thêm, xóa
+        Route::resource('/post', PostController::class)
+            ->except(['index', 'show', 'update', 'create', 'edit']);
+        
+        // Sửa
+        Route::post('/post/{post}', [PostController::class, 'update'])
+            ->name('post.update');        
 });

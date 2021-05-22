@@ -22,9 +22,9 @@ class RegisterController extends Controller
         $user->slug = Str::slug($request->name, '-');
 
         if($request->gender == 'Nam')
-            $user->avatar = Status::APP . '/default/male.png';
+            $user->avatar = Status::APP . 'default/male.png';
         else
-            $user->avatar = Status::APP . '/default/female.png';
+            $user->avatar = Status::APP . 'default/female.png';
 
         $user->save();
 
