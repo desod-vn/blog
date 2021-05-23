@@ -19,6 +19,7 @@ class LogoutController extends Controller
 
             return response()->json([
                 'status' => Status::SUCCESS,
+                'message' => 'Unauthenticated.',
             ]);
         }
     }

@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use App\Http\Requests\Post\CreateRequest;
+use App\Http\Requests\Post\UpdateRequest;
 
 class PostController extends Controller
 {
@@ -44,7 +46,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
         $image = $request->file('image')->store(Status::POST_IMAGE);
 
@@ -54,7 +56,9 @@ class PostController extends Controller
         $post->image = Status::APP . $image;     
         $post->slug = Str::slug($request->name, '-');
         $post->user_id = Auth::user()->id;
+
         $post->save();
+        $post->categories()->attach($request->categories);
 
         return response()->json([
             'status' => Status::SUCCESS,
@@ -66,6 +70,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->update(['view', $post->view++]);
+        $post->categories;
 
         return response()->json([
             'status' => Status::SUCCESS,
@@ -73,7 +78,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function update(Request $request, Post $post)
+    public function update(UpdateRequest $request, Post $post)
     {
         $oldImage = substr($post->image, strlen(Status::APP));
         
@@ -89,6 +94,7 @@ class PostController extends Controller
         }
         
         $post->save();
+        $post->categories()->sync($request->categories);
 
         return response()->json([
             'status' => Status::SUCCESS,
@@ -99,9 +105,11 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
+        $post->categories()->detach();
 
         return response()->json([
             'status' => Status::SUCCESS,
+            'message' => 'Moved to trash.',
         ]);
     }
 }

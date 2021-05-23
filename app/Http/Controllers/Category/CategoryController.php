@@ -77,9 +77,12 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+        $category->posts()->detach();
+
         
         return response()->json([
             'status' => Status::SUCCESS,
+            'message' => 'Moved to trash.',
         ]);
     }
 

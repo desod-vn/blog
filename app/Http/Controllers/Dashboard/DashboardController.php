@@ -41,30 +41,28 @@ class DashboardController extends Controller
         {
             if($request->type == 'category')
             {
-                $category = Category::onlyTrashed()
-                    ->where('id', $id)
-                    ->restore();
-
-                if($category)
-                    return response()->json([
-                        'status' => Status::SUCCESS,
-                    ]);
+                $type = Category::onlyTrashed()
+                    ->where('id', $id);
             }
             else if($request->type == 'post')
             {
-                $post = Post::onlyTrashed()
-                    ->where('id', $id)
-                    ->restore();
+                $type = Post::onlyTrashed()
+                ->where('id', $id);
+            }
+            $action = $type->restore();
 
-                if($post)
-                    return response()->json([
-                        'status' => Status::SUCCESS,
-                    ]);
+            if($action)
+            {
+                return response()->json([
+                    'status' => Status::SUCCESS,
+                    'message' => 'Restore success.',
+                ]);
             }
         }
-
+            
         return response()->json([
             'status' => Status::FAILURE,
+            'message' => 'Restore failure.',
         ]);
     }
 
@@ -74,31 +72,29 @@ class DashboardController extends Controller
         {
             if($request->type == 'category')
             {
-                $category = Category::onlyTrashed()
-                    ->where('id', $id)
-                    ->forceDelete();
-                
-                if($category)
-                    return response()->json([
-                        'status' => Status::SUCCESS,
-                    ]);
+                $type = Category::onlyTrashed()
+                    ->where('id', $id);
             }
             else if($request->type == 'post')
             {
-                $post = Post::onlyTrashed()
-                    ->where('id', $id)
-                    ->forceDelete();
-
-                if($post)
-                    return response()->json([
-                        'status' => Status::SUCCESS,
-                    ]);
+                $type = Post::onlyTrashed()
+                ->where('id', $id);
             }
+            $action = $type->forceDelete();
 
-            return response()->json([
-                'status' => Status::FAILURE,
-            ]);
+            if($action)
+            {
+                return response()->json([
+                    'status' => Status::SUCCESS,
+                    'message' => 'Delete success.',
+                ]);
+            }
         }
+            
+        return response()->json([
+            'status' => Status::FAILURE,
+            'message' => 'Delete failure.',
+        ]);
     }
-
+    
 }

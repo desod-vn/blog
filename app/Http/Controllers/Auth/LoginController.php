@@ -22,12 +22,14 @@ class LoginController extends Controller
 
             return response()->json([
                 'status' => Status::SUCCESS,
+                'message' => 'Authenticated.',
                 'token' => $user->token,
             ]);
         }
 
         return response()->json([
             'status' => Status::FAILURE,
+            'message' => 'Unauthenticated.',
         ]);
     }
 
