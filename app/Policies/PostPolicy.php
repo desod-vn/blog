@@ -12,7 +12,7 @@ class PostPolicy
 
     public function before(User $user)
     {
-        if($user->role === 'admin')
+        if($user->role === 'author')
         {
             return true;
         }
@@ -38,20 +38,29 @@ class PostPolicy
 
     public function create(User $user)
     {
-        return $user->role === 'author';
+        if($user->role)
+            return true;
+        
+        return false;
     }
 
 
 
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        if($user->id === $post->user_id)
+            return true;
+
+        return false;
     }
 
 
 
     public function delete(User $user, Post $post)
     {
+        if($user->id === $post->user_id)
+            return true;
+
         return false;
     }
 

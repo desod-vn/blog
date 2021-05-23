@@ -21,12 +21,12 @@ class Post extends Model
 
     public function user()
     {
-        $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     public function categories()
     {
-        $this->belongsToMany('App\Models\Category');
+        return $this->belongsToMany(Category::class);
     }
 
 }

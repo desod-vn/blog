@@ -3,7 +3,9 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Database\QueryException;
 
 class Handler extends ExceptionHandler
 {
@@ -34,8 +36,25 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (AccessDeniedHttpException $e, $request) {
+            return response()->json([
+                'status' => false,
+                'message' => 'The user is not authorized.',
+            ]);
         });
+
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            return response()->json([
+                'status' => false,
+                'message' => 'The page or model is not found.',
+            ]);
+        });
+
+        // $this->renderable(function (QueryException $e, $request) {
+        //     return response()->json([
+        //         'status' => false,
+        //         'message' => 'A',
+        //     ]);
+        // });
     }
 }
