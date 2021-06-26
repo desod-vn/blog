@@ -59,6 +59,10 @@ Route::group(['middleware' => 'auth:api'], function() {
     // Đăng xuất
     Route::post('/logout', [LogoutController::class, 'index'])
         ->name('logout');
+    // Lấy thông tin
+    Route::get('/user', [LoginController::class, 'login'])
+        ->name('user');
+    
 
     /**********
     *****

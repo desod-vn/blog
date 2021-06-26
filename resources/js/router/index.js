@@ -7,6 +7,8 @@ import Home from '../pages/test'
 
 import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
+import Logout from '../pages/auth/Logout'
+
 
 
 
@@ -35,6 +37,14 @@ export default new VueRouter({
             name: 'register',
             meta: {
                 title: 'Đăng ký tài khoản',
+            }
+        },
+        {
+            path: '/logout',
+            component: Logout,
+            name: 'logout',
+            meta: {
+                title: 'Đăng xuất tài khoản',
             }
         }
     ]

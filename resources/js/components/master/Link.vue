@@ -37,14 +37,14 @@
                     :to="{ name: 'home' }" 
                     class="text-white mr-3"
                 >
-                    Đăng ký
+                    Tác giả
                 </router-link>
 
                 <router-link 
                     :to="{ name: 'home' }" 
                     class="text-white"
                 >
-                    Đăng nhập
+                    Bài viết
                 </router-link>
             </div>
 
