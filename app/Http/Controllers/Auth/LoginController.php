@@ -6,7 +6,6 @@ use App\Status;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
 
 class LoginController extends Controller
@@ -14,9 +13,9 @@ class LoginController extends Controller
     // Đăng nhập tài khoản
     public function index(LoginRequest $request)
     {
-        if(Auth::attempt(['name' => $request->name, 'password' => $request->password]))
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password]))
         {
-            $user = User::where('name', $request->name)->first();
+            $user = User::where('email', $request->email)->first();
 
             $user->token = $user->createToken('App')->accessToken;
 

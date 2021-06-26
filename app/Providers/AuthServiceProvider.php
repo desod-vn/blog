@@ -20,6 +20,8 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
+
+        Passport::personalAccessTokensExpireIn(now()->addDays(1));
         
         Gate::define('isAdmin', function (User $user) {
             return $user->role === 'admin';

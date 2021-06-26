@@ -23,7 +23,7 @@ return [
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => evn('GITHUB_CALLBACK_URL'),
+        'redirect' => env('GITHUB_CALLBACK_URL'),
     ],
 
     'postmark' => [
