@@ -10,17 +10,6 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user)
-    {
-        if($user->role === 'author')
-        {
-            return true;
-        }
-        
-        return false;
-    }
-
-
 
     public function viewAny(User $user)
     {
@@ -58,7 +47,7 @@ class PostPolicy
 
     public function delete(User $user, Post $post)
     {
-        if($user->id === $post->user_id)
+        if($user->role === 'admin')
             return true;
 
         return false;

@@ -20,14 +20,10 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'admin',
+            'fullname' => 'admin',
             'email' => 'thangdotpro@gmail.com',
             'password' => Hash::make('123123'),
             'role' => 'admin',
-            'fullname' => 'Vương Toàn Thắng',
-            'avatar' => Status::APP . 'default/admin.png',
-            'gender' => 'Nam',
-            'phone' => '0389064540',
-            'birthday' => '2000/11/09',
             'slug' => Str::slug('admin'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -35,14 +31,10 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'author',
+            'fullname' => 'admin',
             'email' => 'lexuanhoa@gmail.com',
             'password' => Hash::make('123123'),
             'role' => 'author',
-            'fullname' => 'Lê Xuân Hoa',
-            'avatar' => Status::APP . 'default/author.png',
-            'gender' => 'Nữ',
-            'phone' => '0389064540',
-            'birthday' => '2002/06/15',
             'slug' => Str::slug('author'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -50,14 +42,10 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'user',
+            'fullname' => 'user',
             'email' => 'user@gmail.com',
             'password' => Hash::make('123123'),
             'role' => 'user',
-            'fullname' => 'Người dùng',
-            'avatar' => Status::APP . 'default/author.png',
-            'gender' => 'Nam',
-            'phone' => '0389064540',
-            'birthday' => '2001/12/04',
             'slug' => Str::slug('user'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

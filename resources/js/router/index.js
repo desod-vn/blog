@@ -9,8 +9,8 @@ import Login from '../pages/auth/Login'
 import Register from '../pages/auth/Register'
 import Logout from '../pages/auth/Logout'
 
-
-
+import Dashboard from '../pages/dashboard/Dashboard'
+import CreateCategory from '../pages/dashboard/category/Create'
 
 export default new VueRouter({
     mode: 'history',
@@ -46,6 +46,24 @@ export default new VueRouter({
             meta: {
                 title: 'Đăng xuất tài khoản',
             }
+        },
+        {
+            path: '/dashboard',
+            component: Dashboard,
+            name: 'dashboard',
+            meta: {
+                title: 'Trang quản trị',
+            },
+            children: [
+                {
+                    path: 'category/create',
+                    component: CreateCategory,
+                    name: 'create-category',
+                    meta: {
+                        title: 'Tạo thư mục mới',
+                    },
+                },
+            ]
         }
     ]
 })

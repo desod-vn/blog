@@ -15,7 +15,8 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:3|max:255',
+            'fullname' => 'required|string|min:3|max:255|',
+            'name' => 'required|string|min:3|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required|string|min:6',
@@ -25,10 +26,16 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Tên tài khoản không được để trống.',
-            'name.string' => 'Tên tài khoản phải là một chuỗi.',
-            'name.min' => 'Tên tài khoản phải chứa tối thiểu :min ký tự.',
-            'name.max' => 'Tên tài khoản chỉ chứa tối đa :max ký tự.',
+            'fulllname.required' => 'Tên tài khoản không được để trống.',
+            'fulllname.string' => 'Tên tài khoản phải là một chuỗi.',
+            'fulllname.min' => 'Tên tài khoản phải chứa tối thiểu :min ký tự.',
+            'fulllname.max' => 'Tên tài khoản chỉ chứa tối đa :max ký tự.',
+
+            'name.required' => 'Tên đăng nhập không được để trống.',
+            'name.string' => 'Tên đăng nhập phải là một chuỗi.',
+            'name.min' => 'Tên đăng nhập phải chứa tối thiểu :min ký tự.',
+            'name.max' => 'Tên đăng nhập chỉ chứa tối đa :max ký tự.',
+            'name.unique' => 'Tên đăng nhập đã được đăng ký, vui lòng kiểm tra lại.',
 
             'email.required' => 'Địa chỉ email không được để trống.',
             'email.string' => 'Địa chỉ email phải là một chuỗi.',

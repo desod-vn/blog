@@ -13,16 +13,16 @@ class LoginController extends Controller
     // Đăng nhập tài khoản
     public function index(LoginRequest $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password]))
+        if(Auth::attempt(['name' => $request->name, 'password' => $request->password]))
         {
-            $user = User::where('email', $request->email)->first();
+            $user = User::where('name', $request->name)->first();
 
             $user->token = $user->createToken('App')->accessToken;
 
             return response()->json([
                 'status' => Status::SUCCESS,
                 'message' => 'Authenticated.',
-                'token' => $user->token,
+                'user' => $user,
             ]);
         }
 

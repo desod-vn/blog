@@ -131,6 +131,6 @@ export default {
     // Life
     created() {
         this.getUser();
-    } ,
+    },
 };
 </script>
