@@ -6,25 +6,28 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CreateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-            //
+            'comment' => 'required|string|max:1000',
+            'post' => 'required|numeric',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'comment.required' => 'Bình luận không được để trống.',
+            'comment.string' => 'Bình luận phải là một chuỗi.',
+            'comment.max' => 'Bình luận chỉ chứa tối đa :max ký tự.',
+
+            'post.required' => 'Bài viết sở hữu không được để trống.',
+            'post.numeric' => 'Bài viết sở hữu phải là một số.',
         ];
     }
 }

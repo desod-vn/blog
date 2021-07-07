@@ -4,7 +4,7 @@ namespace App\Http\Requests\Comment;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class ReplyRequest extends FormRequest
 {
     public function authorize()
     {
@@ -21,9 +21,9 @@ class UpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'comment.required' => 'Bình luận không được để trống.',
-            'comment.string' => 'Bình luận phải là một chuỗi.',
-            'comment.max' => 'Bình luận chỉ chứa tối đa :max ký tự.',
+            'comment.required' => 'Trả lời bình luận không được để trống.',
+            'comment.string' => 'Trả lời bình luận phải là một chuỗi.',
+            'comment.max' => 'Trả lời bình luận chỉ chứa tối đa :max ký tự.',
         ];
     }
 }

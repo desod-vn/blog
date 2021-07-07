@@ -72,6 +72,11 @@ class PostController extends Controller
         $post->update(['view', $post->view++]);
         $post->categories;
 
+        foreach($post->comments as $comment)
+        {
+            $comment->replies;
+        }
+
         return response()->json([
             'status' => Status::SUCCESS,
             'data' => $post,

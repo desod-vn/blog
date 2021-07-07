@@ -7,7 +7,8 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Post\PostController;
-
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Comment\CommentController;
 
 
 
@@ -50,7 +51,6 @@ Route::group(['middleware' => 'guest'], function() {
     Route::post('/login', [LoginController::class, 'index'])
         ->name('login');
 
-
 });
 
 
@@ -59,36 +59,24 @@ Route::group(['middleware' => 'auth:api'], function() {
     // Đăng xuất
     Route::post('/logout', [LogoutController::class, 'index'])
         ->name('logout');
-    // Lấy thông tin
-    Route::get('/user', [LoginController::class, 'login'])
-        ->name('user');
     
-
     /**********
     *****
-    ***QUẢN LÝ
+    ***THÙNG RÁC
     *****
     **********/
 
-        /**********
-        *****
-        ***THÙNG RÁC
-        *****
-        **********/
+        // Xem
+        Route::get('/trash', [DashboardController::class, 'index'])
+            ->name('trash.view');
 
-            // Xem
-            Route::get('/trash', [DashboardController::class, 'index'])
-                ->name('trash.view');
+        // Khôi phục
+        Route::post('/trash/restore/{id}', [DashboardController::class, 'restore'])
+            ->name('trash.restore');
 
-            // Khôi phục
-            Route::post('/trash/restore/{id}', [DashboardController::class, 'restore'])
-                ->name('trash.restore');
-
-            // Xóa vĩnh viễn
-            Route::delete('/trash/delete/{id}', [DashboardController::class, 'forceDelete'])
-                ->name('trash.delete');
-
-
+        // Xóa vĩnh viễn
+        Route::delete('/trash/delete/{id}', [DashboardController::class, 'forceDelete'])
+            ->name('trash.delete');
 
     /**********
     *****
@@ -113,4 +101,34 @@ Route::group(['middleware' => 'auth:api'], function() {
         // Sửa
         Route::post('/post/{post}', [PostController::class, 'update'])
             ->name('post.update');        
+
+    /**********
+    *****
+    ***NGƯỜI DÙNG
+    *****
+    **********/
+
+        // Thêm, sửa, xóa
+        Route::resource('/user', UserController::class)
+            ->except(['create', 'edit', 'store']);
+        // Ảnh đại diện
+        Route::post('/user/avatar/{user}', [UserController::class, 'avatar'])
+            ->name('user.avatar');
+        // Đổi mật khẩu
+        Route::post('user/password/{user}', [UserController::class, 'password'])
+            ->name('user.password');
+
+    /**********
+    *****
+    ***BÌNH LUẬN
+    *****
+    **********/
+
+        // Thêm, sửa, xóa
+        Route::resource('/comment', CommentController::class)
+            ->except(['index', 'show', 'create', 'edit']);
+        // Ảnh đại diện
+        Route::post('/comment/reply/{comment}', [CommentController::class, 'reply'])
+            ->name('comment.reply');
+        
 });

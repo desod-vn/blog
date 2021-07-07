@@ -26,10 +26,10 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'fulllname.required' => 'Tên tài khoản không được để trống.',
-            'fulllname.string' => 'Tên tài khoản phải là một chuỗi.',
-            'fulllname.min' => 'Tên tài khoản phải chứa tối thiểu :min ký tự.',
-            'fulllname.max' => 'Tên tài khoản chỉ chứa tối đa :max ký tự.',
+            'fullname.required' => 'Tên tài khoản không được để trống.',
+            'fullname.string' => 'Tên tài khoản phải là một chuỗi.',
+            'fullname.min' => 'Tên tài khoản phải chứa tối thiểu :min ký tự.',
+            'fullname.max' => 'Tên tài khoản chỉ chứa tối đa :max ký tự.',
 
             'name.required' => 'Tên đăng nhập không được để trống.',
             'name.string' => 'Tên đăng nhập phải là một chuỗi.',

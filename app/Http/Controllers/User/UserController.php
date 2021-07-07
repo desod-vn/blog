@@ -2,84 +2,110 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
+use App\Status;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UpdateRequest;
+use App\Http\Requests\User\PasswordRequest;
+use App\Http\Requests\User\AvatarRequest;
+
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function __construct()
     {
-        //
+        $this->authorizeResource(User::class, 'user', ['except' => ['show']]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function index(Request $request)
     {
-        //
+        $users = User::query()->latest();
+
+        if($request->has('search'))
+        {
+            $users->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('email', 'like', '%' . $request->search . '%');
+        }
+
+        $users = $users->paginate(Status::USER_PER_PAGE);
+
+        return response()->json([
+            'status' => Status::SUCCESS,
+            'data' => $users,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function avatar(AvatarRequest $request, User $user)
     {
-        //
+        $this->authorize('update', $user);
+
+        $image = substr($user->avatar, strlen(Status::APP));
+
+        if($request->has('image'))
+        {
+            Storage::delete($image);
+            $image = $request->file('image')->store(Status::USER_IMAGE);
+            $user->avatar = Status::APP . $image;
+        }
+        
+        $user->save();
+
+        return response()->json([
+            'status' => Status::SUCCESS,
+            'data' => $user,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function password(PasswordRequest $request, User $user)
     {
-        //
+        $this->authorize('update', $user);
+
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return response()->json([
+            'status' => Status::SUCCESS,
+            'message' => 'Password was changed.',
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function show(User $user)
     {
-        //
+        return response()->json([
+            'status' => Status::SUCCESS,
+            'data' => $user,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, User $user)
     {
-        //
+        $user->fullname = $request->fullname;
+        $user->birthday = $request->birthday;
+        $user->gender = $request->gender;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->story = $request->story;
+
+        $user->save();
+
+        return response()->json([
+            'status' => Status::SUCCESS,
+            'data' => $user,
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return response()->json([
+            'status' => Status::SUCCESS,
+            'message' => 'The user was banned.',
+        ]);
     }
 }
