@@ -1,63 +1,58 @@
 <template>
-    <section class="min-h-screen flex flex-col">
-        <nav class="bg-gray-200">
-            <div class="px-4 py-4">
-                <router-link 
-                    :to="{ name: 'home' }" 
-                    class="font-bold tracking-wider text-4xl w-full no-underline hover:no-underline text-gray-600"
-                >
-                    Desod
-                </router-link>
-            </div>
-        </nav>
-        <Error :error="error" />
-        <div class="flex items-center justify-center flex-1">
-            <div class="rounded-xl shadow-lg sm:border-2 px-4 lg:px-24 py-16 lg:max-w-xl sm:max-w-md w-full text-center">
-                <div class="text-center">
-                    <h1 class="font-bold tracking-wider text-3xl mb-8 w-full text-blue-400">
-                        Đăng nhập
-                    </h1>
-                    <div 
-                        v-if="message"
-                        class="bg-blue-100 py-2 px-3 mb-6 mx-2 text-left"
-                    >
-                        Địa chỉ email hoặc mật khẩu không chính xác. Vui lòng kiểm tra và đăng nhập lại.
-                    </div>
-                    <div class="p-2">
-                        <input
-                            v-model="user.email"
-                            type="email"
-                            class="bg-gray-100 border-2 border-gray-100 focus:outline-none block w-full py-3 px-4 rounded-lg focus:border-gray-500" 
-                            placeholder="Email"
-                        />
-                    </div>
-                    <div class="p-2">
-                        <input 
-                            v-model="user.password"
-                            type="password" 
-                            class="bg-gray-100 border-2 border-gray-100 focus:outline-none block w-full py-3 px-4 rounded-lg focus:border-gray-500" 
-                            placeholder="Mật khẩu" />
-                    </div>
-                    <div class="p-2">
+    <section class="login">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-center align-items-center min-vh-100">
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                        <figure class="text-center mb-5">
+                            <router-link :to="{ name: 'home' }">
+                               <img src="images/logo-thumb.png" alt="" title="Trang chủ"/>
+                            </router-link>
+                        </figure>
+                        <div class="form-group">
+                            <input
+                                type="text"
+                                class="form-control my-3 py-4 rounded-0"
+                                v-model="user.name"
+                                placeholder="Tên đăng nhập"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <input
+                                type="password"
+                                class="form-control my-3 py-4 rounded-0"
+                                v-model="user.password"
+                                placeholder="Mật khẩu"
+
+                            />
+                        </div>
+                        <p class="text-right">
+                            <router-link 
+                                :to="{ name: 'register' }"
+                                class="text-decoration-none"
+                            >
+                                Quên mật khẩu
+                            </router-link>
+                        </p>
                         <button 
-                            @click="handle()"
                             type="submit" 
-                            class="border-2 uppercase border-blue-100 focus:outline-none bg-blue-600 text-white font-bold tracking-wider block w-full p-3 rounded-lg focus:border-blue-700 hover:bg-blue-700"
+                            class="btn rounded-0 btn-block btn-lg btn-success"
+                            @click="handle()"
                         >
                             Đăng nhập
                         </button>
+
+                        <p class="mt-4">
+                            Không có tài khoản ? 
+                            <router-link 
+                                :to="{ name: 'register' }"
+                                class="text-decoration-none"
+                            >
+                                Tạo tài khoản mới <b-icon icon="arrow-right"></b-icon>
+                            </router-link>
+                        </p>
                     </div>
-                </div>
-                <div class="text-center mt-12">
-                    <span>
-                        Bạn chưa có tài khoản ?
-                    </span>
-                    <router-link 
-                        :to="{ name: 'register' }" 
-                        class="font-light text-md text-blue-600 font-semibold hover:text-blue-800"
-                    >
-                        Tạo tài khoản
-                    </router-link>
                 </div>
             </div>
         </div>
@@ -65,46 +60,46 @@
 </template>
 
 <script>
-import desod from '../../utils/axios'
-// Components List
-import Error from '../../components/Error'
+import { mapActions, mapGetters } from 'vuex';
+
+/*****COMPONENTS*****/
 
 export default {
-    data() {
+    data() { 
         return {
             user: {
-                email: '',
+                name: '',
                 password: '',
             },
-            error: {},
-            message: '',
+            join: false,
+        }
+    },
+
+    computed: {
+        ...mapGetters(['getStatus', 'getError', 'getToken'])
+    },
+
+    watch: {
+        getStatus() {
+            if(this.getStatus == true)
+            {
+                localStorage.setItem("token", this.getToken);
+                this.$router.push({ name: "home" });
+            }
         }
     },
 
     methods: {
-        handle () {
-            desod
-                .post(`login`, this.user)
-                .then(response => {
-                    this.error = {}
-                    if (response.data.status) {
-                        localStorage.setItem("token", response.data.token);
-                        this.$router.push({ name: "home" });
-                    }
-                    else {
-                        this.message = response.data;
-                    }
-                })
-                .catch(error => {
-                    this.error = error.response.data.errors
-                })
+        ...mapActions(['login']),
+        async handle() {
+            await this.login(this.user)
+            this.join = !this.getStatus
         }
     },
 
-    components: {
-        Error,
-    },
-// Life cycle
-
+    created() {
+        if(this.getStatus == true)
+            this.$router.push({ name: "home" });
+    }
 }
 </script>

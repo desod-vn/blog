@@ -1,79 +1,103 @@
 <template>
-    <div id="login">
-        <section class="min-h-screen flex flex-col">
-            <nav class="bg-gray-200">
-                <div class="px-4 py-4">
-                    <router-link 
-                        :to="{ name: 'home' }" 
-                        class="font-bold tracking-wider text-4xl w-full no-underline hover:no-underline text-gray-600"
-                    >
-                        Desod
-                    </router-link>
-                </div>
-            </nav>
-            <Error :error="error" />
-            <div class="flex items-center justify-center flex-1">
-                <div class="rounded-xl shadow-lg sm:border-2 px-4 lg:px-24 py-16 lg:max-w-xl sm:max-w-md w-full text-center">
-                    <div class="text-center">
-                        <h1 class="font-bold tracking-wider text-3xl mb-8 w-full text-blue-400">
-                            Đăng ký tài khoản
-                        </h1>
-                        <div class="p-2">
+<section class="login">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-center align-items-center min-vh-100">
+                    <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                        <figure class="text-center mb-5">
+                            <router-link :to="{ name: 'home' }">
+                               <img src="images/logo-thumb.png" alt="" title="Trang chủ"/>
+                            </router-link>
+                        </figure>
+                       <div class="form-group">
                             <input
+                                type="text"
+                                class="form-control my-3 py-4 rounded-0"
                                 v-model="user.name"
-                                type="text" 
-                                class="bg-gray-100 border-2 border-gray-100 focus:outline-none block w-full py-3 px-4 rounded-lg focus:border-gray-500" 
+                                placeholder="Tên đăng nhập"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <input
+                                type="email"
+                                class="form-control my-3 py-4 rounded-0"
+                                v-model="user.email"
+                                placeholder="Địa chỉ email"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <input
+                                type="email"
+                                class="form-control my-3 py-4 rounded-0"
+                                v-model="user.fullname"
                                 placeholder="Tên tài khoản"
                             />
                         </div>
-                        <div class="p-2">
-                            <input 
-                                v-model="user.email"
-                                type="email" 
-                                class="bg-gray-100 border-2 border-gray-100 focus:outline-none block w-full py-3 px-4 rounded-lg focus:border-gray-500" 
-                                placeholder="Email"
+
+                        <div class="form-group">
+                            <input
+                                type="password"
+                                class="form-control my-3 py-4 rounded-0"
+                                v-model="user.password"
+                                placeholder="Mật khẩu"
                             />
                         </div>
-                        <div class="p-2">
-                            <input 
-                                v-model="user.password"
-                                type="password" 
-                                class="bg-gray-100 border-2 border-gray-100 focus:outline-none block w-full py-3 px-4 rounded-lg focus:border-gray-500" 
-                                placeholder="Mật khẩu" />
-                        </div>
-                        <div class="p-2">
-                            <input 
+
+                        <div class="form-group">
+                            <input
+                                type="password"
+                                class="form-control my-3 py-4 rounded-0"
                                 v-model="user.password_confirmation"
-                                type="password" 
-                                class="bg-gray-100 border-2 border-gray-100 focus:outline-none block w-full py-3 px-4 rounded-lg focus:border-gray-500" 
-                                placeholder="Xác nhận mật khẩu" />
+                                placeholder="Xác nhận mật khẩu"
+                            />
                         </div>
-                        <div class="p-2">
-                            <button
-                                @click="handle()"
-                                type="submit" 
-                                class="border-2 uppercase border-blue-100 focus:outline-none bg-blue-600 text-white font-bold tracking-wider block w-full p-3 rounded-lg focus:border-blue-700 hover:bg-blue-700"
+
+                        <p>
+                            Kiểm tra 2 mật khẩu
+                            <span v-if="user.password_confirmation != ''">
+                                <span
+                                v-if="user.password_confirmation == user.password"
+                                class="h5 text-white float-right"
+                                >
+                                    <b-icon icon="check" class="rounded-circle bg-primary">
+                                    </b-icon>
+                                </span>
+
+                                <span v-else class="h5 text-white float-right">
+                                    <b-icon icon="exclamation" class="rounded-circle bg-danger">
+                                    </b-icon>
+                                </span>
+                            </span>
+                        </p>
+                        <button 
+                            type="submit" 
+                            class="btn rounded-0 btn-block btn-lg btn-success"
+                            @click="handle()"
+                        >
+                            Đăng ký
+                        </button>
+
+                        <p class="mt-4 text-right">
+                            <router-link 
+                                :to="{ name: 'login' }"
+                                class="text-decoration-none"
                             >
-                                Đăng ký
-                            </button>
-                        </div>
-                    </div>
-                    <div class="text-center mt-12">
-                        <span>
-                            Đã có tài khoản ?
-                        </span>
-                        <router-link :to="{ name: 'login' }" class="font-light text-md text-blue-600 font-semibold hover:text-blue-800">Đăng nhập</router-link>
+                                <b-icon icon="arrow-left"></b-icon> Đã có tài khoản
+                            </router-link>                 
+                        </p>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 </template>
 
 <script>
-import desod from '../../utils/axios'
-// Components List
-import Error from '../../components/Error'
+import { mapActions, mapGetters } from 'vuex';
+
+/*****COMPONENTS*****/
 
 export default {
     data() {
@@ -84,35 +108,35 @@ export default {
                 password: '',
                 password_confirmation: '',
             },
-            error: {},
-            message: '',
+            join: false,
+        }
+    },
+
+    computed: {
+        ...mapGetters(['getStatus', 'getError', 'getToken'])
+    },
+
+    watch: {
+        getStatus() {
+            if(this.getStatus == true)
+            {
+                localStorage.setItem("token", this.getToken);
+                this.$router.push({ name: "home" });
+            }
         }
     },
 
     methods: {
-        handle () {
-            desod
-                .post(`register`, this.user)
-                .then(response => {
-                    this.error = {}
-                    if (response.data.status) {
-                        localStorage.setItem("token", response.data.token);
-                        this.$router.push({ name: "home" });
-                    }
-                    else {
-                        this.message = response.data;
-                    }
-                })
-                .catch(error => {
-                    this.error = error.response.data.errors
-                })
+        ...mapActions(['register']),
+        async handle() {
+            await this.register(this.user)
+            this.join = !true
         }
     },
 
-    components: {
-        Error,
-    },
-// Life cycle
-
+    created() {
+        if(this.getStatus == true)
+            this.$router.push({ name: "home" });
+    }
 }
 </script>

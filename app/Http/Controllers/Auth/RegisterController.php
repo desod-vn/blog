@@ -22,6 +22,8 @@ class RegisterController extends Controller
 
         $user->save();
 
+        $user = User::where('name', $user->name)->first();
+
         $user->token = $user->createToken('App')->accessToken;
 
         return response()->json([

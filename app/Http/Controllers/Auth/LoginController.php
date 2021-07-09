@@ -32,4 +32,15 @@ class LoginController extends Controller
         ]);
     }
 
+    public function user() 
+    {
+        $user = Auth::user();
+
+        return response()->json([
+            'status' => Status::SUCCESS,
+            'message' => 'Authenticated.',
+            'user' => $user,
+        ]);
+    }
+
 }

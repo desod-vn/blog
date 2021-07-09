@@ -12,7 +12,9 @@ import Logout from '../pages/auth/Logout'
 import Dashboard from '../pages/dashboard/Dashboard'
 import CreateCategory from '../pages/dashboard/category/Create'
 
-export default new VueRouter({
+
+
+const Router = new VueRouter({
     mode: 'history',
     routes: [
         {
@@ -67,3 +69,10 @@ export default new VueRouter({
         }
     ]
 })
+
+Router.beforeEach((to, from, next) => {
+    document.title = to.meta.title || 'DESOD';
+    next();
+})
+
+export default Router;

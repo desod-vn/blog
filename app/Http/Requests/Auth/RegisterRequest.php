@@ -16,7 +16,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'fullname' => 'required|string|min:3|max:255|',
-            'name' => 'required|string|min:3|max:255|unique:users',
+            'name' => 'required|string|min:3|max:255|alpha_dash|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required|string|min:6',
@@ -35,6 +35,7 @@ class RegisterRequest extends FormRequest
             'name.string' => 'Tên đăng nhập phải là một chuỗi.',
             'name.min' => 'Tên đăng nhập phải chứa tối thiểu :min ký tự.',
             'name.max' => 'Tên đăng nhập chỉ chứa tối đa :max ký tự.',
+            'name.alpha_dash' => 'Tên đăng nhập chỉ chứa chữ và số.',
             'name.unique' => 'Tên đăng nhập đã được đăng ký, vui lòng kiểm tra lại.',
 
             'email.required' => 'Địa chỉ email không được để trống.',

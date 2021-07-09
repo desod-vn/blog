@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Header from '../components/master/Header'
+import Header from '../layouts/Header'
 export default {
 	components: {
 		Header,

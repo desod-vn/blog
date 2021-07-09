@@ -4,11 +4,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import Router from './router'
 import Store from './store'
-
-Router.beforeEach((to, from, next) => {
-    document.title = to.meta.title || 'TOP TRAVEL';
-    next();
-})
+import './theme/default'
 
 new Vue({
     router: Router,

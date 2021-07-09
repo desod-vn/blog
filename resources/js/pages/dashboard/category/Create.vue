@@ -29,7 +29,7 @@
     </section>
 </template>
 <script>
-import desod from '../../../utils/axios'
+import desod from '../../../utils/call'
 // Components List
 import Breadcrumb from '../../../components/Breadcrumb'
 import Error from '../../../components/Error'
