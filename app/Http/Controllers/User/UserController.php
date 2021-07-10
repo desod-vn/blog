@@ -76,6 +76,11 @@ class UserController extends Controller
 
     public function show(User $user)
     {
+        $user->posts;
+
+        foreach($user->comments as $comment)
+            $comment->post;
+
         return response()->json([
             'status' => Status::SUCCESS,
             'data' => $user,

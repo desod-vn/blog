@@ -9,10 +9,8 @@ class Status
     const FAILURE = false;
 
     const POST_PER_PAGE = 10;
-    const COMMENT_PER_PAGE = 10;
     const USER_PER_PAGE = 10;
 
-    const USER_IMAGE = 'user';
-    const POST_IMAGE = 'post';
-    const BANNER_IMAGE = 'banner';
+    const USER_IMAGE = 'users-img';
+    const POST_IMAGE = 'posts-img';
 }

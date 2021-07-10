@@ -3,12 +3,19 @@
         <div class="container">
             <div class="row">
                 <div class="d-flex justify-content-center align-items-center min-vh-100">
-                    <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                    <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
                         <figure class="text-center mb-5">
                             <router-link :to="{ name: 'home' }">
-                               <img src="images/logo-thumb.png" alt="" title="Trang chủ"/>
+                               <img src="/images/logo-thumb.png" alt="" title="Trang chủ"/>
                             </router-link>
                         </figure>
+                        <Error v-if="errors" :errors="errors" />
+                        <div
+                            v-if="join && !getStatus"
+                            class=" alert alert-info"
+                        >
+                            Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin.
+                        </div>
                         <div class="form-group">
                             <input
                                 type="text"
@@ -64,6 +71,8 @@ import { mapActions, mapGetters } from 'vuex';
 
 /*****COMPONENTS*****/
 
+import Error from '../../components/Error';
+
 export default {
     data() { 
         return {
@@ -72,7 +81,12 @@ export default {
                 password: '',
             },
             join: false,
+            errors: false,
         }
+    },
+
+    components: {
+        Error,
     },
 
     computed: {
@@ -86,20 +100,25 @@ export default {
                 localStorage.setItem("token", this.getToken);
                 this.$router.push({ name: "home" });
             }
+        },
+
+        getError () {
+            this.errors = this.getError
         }
     },
 
     methods: {
         ...mapActions(['login']),
-        async handle() {
-            await this.login(this.user)
-            this.join = !this.getStatus
+        handle() {
+            this.login(this.user)
+            setTimeout(() =>
+            this.join = !this.getStatus, 500)
         }
     },
 
     created() {
         if(this.getStatus == true)
             this.$router.push({ name: "home" });
-    }
+    },
 }
 </script>

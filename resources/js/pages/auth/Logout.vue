@@ -19,8 +19,8 @@ export default {
 
     methods: {
         ...mapActions(['logout']),
-        async handle() {
-            await this.logout()
+        handle() {
+            this.logout()
         }
     },
 

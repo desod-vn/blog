@@ -1,7 +1,23 @@
 <template>
-    <router-view />
+    <div>
+        <Loading :loadTime="loadTime" />
+        <router-view :key="$route.fullPath" />
+    </div>
 </template>
 
 <script>
-export default {};
+import Loading from './components/Loading'
+export default {
+    data() {
+        return {
+            loadTime: 500,
+        }
+    },
+    
+    components: {
+        Loading,
+    }
+}
 </script>
+
+

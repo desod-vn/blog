@@ -1,15 +1,22 @@
 <template>
-<section class="login">
+    <section class="register">
         <div class="container">
             <div class="row">
                 <div class="d-flex justify-content-center align-items-center min-vh-100">
-                    <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                    <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
                         <figure class="text-center mb-5">
                             <router-link :to="{ name: 'home' }">
-                               <img src="images/logo-thumb.png" alt="" title="Trang chủ"/>
+                               <img src="/images/logo-thumb.png" alt="" title="Trang chủ"/>
                             </router-link>
                         </figure>
-                       <div class="form-group">
+                        <Error v-if="errors" :errors="errors" />
+                        <!-- <div
+                            v-if="join && !getStatus"
+                            class=" alert alert-info"
+                        >
+                            Tên đăng nhập hoặc mật khẩu không chính xác. Vui lòng kiểm tra lại.
+                        </div> -->
+                        <div class="form-group">
                             <input
                                 type="text"
                                 class="form-control my-3 py-4 rounded-0"
@@ -99,6 +106,8 @@ import { mapActions, mapGetters } from 'vuex';
 
 /*****COMPONENTS*****/
 
+import Error from '../../components/Error';
+
 export default {
     data() {
         return {
@@ -109,9 +118,14 @@ export default {
                 password_confirmation: '',
             },
             join: false,
+            errors: {},
         }
     },
 
+    components: {
+        Error,
+    },
+    
     computed: {
         ...mapGetters(['getStatus', 'getError', 'getToken'])
     },
@@ -123,13 +137,17 @@ export default {
                 localStorage.setItem("token", this.getToken);
                 this.$router.push({ name: "home" });
             }
+        },
+
+        getError () {
+            this.errors = this.getError
         }
     },
 
     methods: {
         ...mapActions(['register']),
-        async handle() {
-            await this.register(this.user)
+        handle() {
+            this.register(this.user)
             this.join = !true
         }
     },
@@ -137,6 +155,6 @@ export default {
     created() {
         if(this.getStatus == true)
             this.$router.push({ name: "home" });
-    }
+    },
 }
 </script>
