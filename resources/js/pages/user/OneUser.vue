@@ -1,5 +1,5 @@
 <template>
-    <section id="one-user" class="mt-5">
+    <section id="one-user">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
@@ -11,13 +11,15 @@
                         >
                             <b-icon icon="pencil-square" /> Sửa thông tin  
                         </router-link>
-                        <div class="row mb-5 p-2">
+                        <div class="row mt-2 mb-5 p-2">
 
                             <div class="col-4">
                                 <router-link to="">
                                     <img 
+                                        height="200px"
+                                        width="100%"
                                         :src="getUserInfo.avatar || '/images/default-thumb.png'" 
-                                        class="img-thumbnail" 
+                                        class="border p-1 fit" 
                                         alt="" 
                                     />
                                 </router-link>
@@ -31,17 +33,45 @@
                                 <p>{{ getUserInfo.story }}</p>
                             </div>
                         </div>
+
+                        <b-tabs
+                            active-nav-item-class="mb-1 text-primary" 
+                            content-class="bg-white"
+                            fill
+                        >
                         
-                        <b-tabs content-class="bg-white" fill>
-                            <b-tab title="Thông tin" :active="action == '' ? true : false">
+                            <b-tab 
+                                title="Thông tin" 
+                                :active="action == '' ? true : false"
+                                title-link-class="border-white"
+                            >
                                 <InfoUser :moment="moment" :getUserInfo="getUserInfo" />
                             </b-tab>
-                            <b-tab title="Bài viết" :active="action == 'posts' ? true : false">
-                                <p id="post">I'm the second tab</p>
+                        
+                            <b-tab 
+                                title="Bài viết" 
+                                :active="action == 'posts' ? true : false"
+                                title-link-class="border-white"
+                            >
+                                <Post 
+                                    :moment="moment" 
+                                    :posts="getUserPost"
+                                />
                             </b-tab>
-                            <b-tab title="Bình luận" :active="action == 'comments' ? true : false">
-                                <p>I'm the tab with the very, very long title</p>
+
+                            <b-tab 
+                                title="Bình luận" 
+                                :active="action == 'comments' ? true : false"
+                                title-link-class="border-white"
+                            >
+                                <Comment 
+                                    :moment="moment" 
+                                    :comments="getUserComment" 
+                                    :user="getUser"
+                                    :userInfo="getUserInfo"
+                                />
                             </b-tab>
+                        
                         </b-tabs>
                     </div>
                 </div>
@@ -57,7 +87,8 @@ import { mapActions, mapGetters } from 'vuex';
 import moment from 'moment';
 
 import InfoUser from '../../components/user/oneUser/Info';
-
+import Post from '../../components/user/oneUser/Post';
+import Comment from '../../components/user/oneUser/Comment';
 
 export default {
     data() {
@@ -68,8 +99,11 @@ export default {
             action: this.$route.query.action
         }
     },
+
     components: {
         InfoUser,
+        Post,
+        Comment,
     },
 
     watch: {
@@ -84,14 +118,21 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['getStatus', 'getUserInfo', 'getUser'])
+        ...mapGetters([
+            'getStatus',
+            'getUserInfo',
+            'getUser',
+            'getUserPost', 
+            'getUserComment'
+        ])
     },
 
     methods: {
         ...mapActions(['oneUser']),
         handle() {
             this.oneUser(this.id)
-        }
+        },
+
     },
 
     created(){
@@ -118,14 +159,25 @@ export default {
 .shadow {
     box-shadow: 2px 2px 3px #ccc;
 }
+.fit {
+    object-fit: cover;
+}
 .stick {
     top: 0;
     right: 0;
+    display: inline-block;
     transform: translateX(-10%);
 }
 .user-name {
     font-size: 2rem;
-    font-weight: bold;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 500;
 }
+.on:hover, .on:focus{
+    border: none;
+}
+.on {
+    border: orangered;
+    background: olivedrab!important;
+}
+
 </style>

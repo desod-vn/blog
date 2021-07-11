@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar bg-light-blue navbar-light navbar-expand">
+    <nav class="navbar bg-light-blue navbar-light navbar-expand mb-5">
     <div class="container">
         <div class="nav-brand">
             <router-link :to="{ name: 'home' }">
