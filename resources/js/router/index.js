@@ -16,6 +16,8 @@ import Logout from '../pages/auth/Logout'
 // USER
 import User from '../pages/user/Index'
 import OneUser from '../pages/user/OneUser'
+import UpdateUser from '../pages/user/UpdateUser'
+
 
 
 
@@ -75,8 +77,13 @@ const Router = new VueRouter({
                     path: ':id-:slug',
                     component: OneUser,
                     name: 'one-user',
+                },
+                {
+                    path: 'update',
+                    component: UpdateUser,
+                    name: 'update-user',
                     meta: {
-                        title: '',
+                        title: 'Chỉnh sửa thông tin',
                     }
                 },
             ]

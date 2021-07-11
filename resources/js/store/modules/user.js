@@ -9,6 +9,8 @@ const state = {
 
 const getters = {
     getUserInfo: state => { return state.userInfo },
+    getUserPost: state => { return state.userPosts },
+    getUserComment: state => { return state.userComments },
 }
 
 const actions = {
