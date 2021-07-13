@@ -12,7 +12,7 @@ export default {
         getStatus() {
             if(this.getStatus == false)
             {
-                this.$router.push({ name: "home" });
+                this.$router.push({ name: "home" })
             }
         }
     },
@@ -27,7 +27,7 @@ export default {
     created() {
         this.handle()
         if(this.getStatus == false)
-            this.$router.push({ name: "home" });
+            this.$router.push({ name: "home" })
     }
 }
 </script>

@@ -100,10 +100,18 @@
 
                     <b-dropdown-item>
                         <router-link 
-                            :to="{ name: 'login' }"
+                            :to="{ name: 'update-user' }"
                             class="text-decoration-none"            
                         >
                             <b-icon icon="person-lines-fill" /> Thay đổi thông tin
+                        </router-link>
+                    </b-dropdown-item>
+                    <b-dropdown-item>
+                        <router-link 
+                            :to="{ name: 'change-password' }"
+                            class="text-decoration-none"
+                        >
+                            <b-icon icon="key-fill" /> Đổi mật khẩu
                         </router-link>
                     </b-dropdown-item>
                         <hr />
