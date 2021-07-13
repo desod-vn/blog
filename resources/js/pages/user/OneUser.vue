@@ -88,9 +88,9 @@ import { mapActions, mapGetters } from 'vuex';
 /*****COMPONENTS*****/
 import moment from 'moment';
 
-import InfoUser from '../../components/user/oneUser/Info';
-import Post from '../../components/user/oneUser/Post';
-import Comment from '../../components/user/oneUser/Comment';
+import InfoUser from '../../components/user/Info';
+import Post from '../../components/user/Post';
+import Comment from '../../components/user/Comment';
 
 export default {
     data() {

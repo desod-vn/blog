@@ -19,13 +19,11 @@ import OneUser from '../pages/user/OneUser'
 import UpdateUser from '../pages/user/UpdateUser'
 import PasswordUser from '../pages/user/Password'
 
-
-
-
-
-import Dashboard from '../pages/dashboard/Dashboard'
-import CreateCategory from '../pages/dashboard/category/Create'
-
+// USER
+import Post from '../pages/post/Index'
+import OnePost from '../pages/post/OnePost'
+import UpdatePost from '../pages/post/UpdatePost'
+import CreatePost from '../pages/post/CreatePost'
 
 
 const Router = new VueRouter({
@@ -99,23 +97,33 @@ const Router = new VueRouter({
             ]
         },
         {
-            path: '/dashboard',
-            component: Dashboard,
-            name: 'dashboard',
-            meta: {
-                title: 'Trang quản trị',
-            },
+            path: '/post',
+            component: Post,
+            name: 'post',
             children: [
                 {
-                    path: 'category/create',
-                    component: CreateCategory,
-                    name: 'create-category',
+                    path: ':id-:slug',
+                    component: OnePost,
+                    name: 'one-post',
+                },
+                {
+                    path: 'update',
+                    component: UpdatePost,
+                    name: 'update-post',
                     meta: {
-                        title: 'Tạo thư mục mới',
-                    },
+                        title: 'Chỉnh sửa bài viết',
+                    }
+                },
+                {
+                    path: 'create',
+                    component: CreatePost,
+                    name: 'create-post',
+                    meta: {
+                        title: 'Tạo bài vỉết mới',
+                    }
                 },
             ]
-        }
+        },
     ],
     scrollBehavior (to, from, savedPosition) {
         return { x: 0, y: 0 }
