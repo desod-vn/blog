@@ -7,10 +7,11 @@
 
 <script>
 import Loading from './components/Loading'
+
 export default {
     data() {
         return {
-            loadTime: 500,
+            loadTime: 600,
         }
     },
     

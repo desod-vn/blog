@@ -127,7 +127,7 @@
             </li>
             <li class="nav-item">
                 <router-link 
-                    :to="{ name: 'register' }"
+                    :to="{ name: 'create-post' }"
                     class="nav-link text-decoration-none border border-secondary text-white bg-dark px-md-5 rounded-pill"            
                 >
                     <b-icon icon="plus-circle-fill" /> 

@@ -47,9 +47,9 @@ class UpdateRequest extends FormRequest
             'address.string' => 'Địa chỉ phải là một chuỗi.',
             'address.max' => 'Địa chỉ chỉ chứa tối đa :max ký tự.',
 
-            'story.required' => 'Mô tả bản thân không được để trống.',
-            'story.string' => 'Mô tả bản thân phải là một chuỗi.',
-            'story.max' => 'Mô tả bản thân chỉ chứa tối đa :max ký tự.',
+            'story.required' => 'Giới thiệu bản thân không được để trống.',
+            'story.string' => 'Giới thiệu bản thân phải là một chuỗi.',
+            'story.max' => 'Giới thiệu bản thân chỉ chứa tối đa :max ký tự.',
 
         ];
     }

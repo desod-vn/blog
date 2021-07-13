@@ -12,7 +12,8 @@ export default {
         getStatus() {
             if(this.getStatus == false)
             {
-                this.$router.push({ name: "home" })
+                localStorage.removeItem('token');
+                this.$router.push({ name: 'home' })
             }
         }
     },

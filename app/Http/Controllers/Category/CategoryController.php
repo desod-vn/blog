@@ -24,7 +24,7 @@ class CategoryController extends Controller
 
         if($request->has('search'))
         {
-            $category->where(['name', 'like', '%' . $request->search . '%']);
+            $category->where('name', 'like', '%' . $request->search . '%');
         }
 
         $category = $category->get();

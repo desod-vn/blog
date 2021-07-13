@@ -42,12 +42,7 @@
 
 					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mx-auto">
 						<div class="ratio ratio-16x9">
-							<iframe
-								class="shadow-1-strong rounded"
-								src="https://www.youtube.com/embed/vlDzYIIOYmM"
-								title="YouTube video"
-								allowfullscreen
-							></iframe>
+							
 						</div>
 					</div>
 
