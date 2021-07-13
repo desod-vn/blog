@@ -54,6 +54,7 @@
                                 title-link-class="border-white"
                             >
                                 <Post 
+                                    v-if="show"
                                     :moment="moment" 
                                     :posts="getUserPost"
                                 />
@@ -65,6 +66,7 @@
                                 title-link-class="border-white"
                             >
                                 <Comment 
+                                    v-if="show"
                                     :moment="moment" 
                                     :comments="getUserComment" 
                                     :user="getUser"
@@ -96,7 +98,8 @@ export default {
             moment: moment,
             id: this.$route.params.id,
             slug: this.$route.params.slug,
-            action: this.$route.query.action
+            action: this.$route.query.action,
+            show: false,
         }
     },
 
@@ -142,6 +145,7 @@ export default {
     mounted() {
         setTimeout(() =>
         {
+            this.show = true
             if(!this.getStatus)
                 this.$router.push({ name: 'home' })
         }, 500)
@@ -165,6 +169,7 @@ export default {
 .stick {
     top: 0;
     right: 0;
+    z-index: 1;
     display: inline-block;
     transform: translateX(-10%);
 }

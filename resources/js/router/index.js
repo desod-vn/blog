@@ -17,6 +17,8 @@ import Logout from '../pages/auth/Logout'
 import User from '../pages/user/Index'
 import OneUser from '../pages/user/OneUser'
 import UpdateUser from '../pages/user/UpdateUser'
+import PasswordUser from '../pages/user/Password'
+
 
 
 
@@ -34,7 +36,7 @@ const Router = new VueRouter({
             component: Home,
             name: 'home',
             meta: {
-                title: 'Website hỗ trợ và tổ chức tham gia hoạt động du lịch',
+                title: 'Trang chủ',
             }
         },
         {
@@ -86,6 +88,14 @@ const Router = new VueRouter({
                         title: 'Chỉnh sửa thông tin',
                     }
                 },
+                {
+                    path: 'password',
+                    component: PasswordUser,
+                    name: 'change-password',
+                    meta: {
+                        title: 'Đổi mật khẩu',
+                    }
+                },
             ]
         },
         {
@@ -106,7 +116,11 @@ const Router = new VueRouter({
                 },
             ]
         }
-    ]
+    ],
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }
+    }
+
 })
 
 Router.beforeEach((to, from, next) => {
