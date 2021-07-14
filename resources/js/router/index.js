@@ -107,7 +107,7 @@ const Router = new VueRouter({
                     name: 'one-post',
                 },
                 {
-                    path: 'update',
+                    path: 'update/:id',
                     component: UpdatePost,
                     name: 'update-post',
                     meta: {

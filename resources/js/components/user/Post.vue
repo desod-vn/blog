@@ -18,7 +18,7 @@
 
                 <router-link
                     :to="{
-                        name: 'post',
+                        name: 'one-post',
                         params: { id: post.id, slug: post.slug },
                     }"
                     class="position-absolute point"

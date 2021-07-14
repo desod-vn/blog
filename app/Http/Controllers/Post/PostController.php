@@ -70,6 +70,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->update(['view', $post->view++]);
+        $post->user;
         $post->categories;
 
         foreach($post->comments as $comment)
