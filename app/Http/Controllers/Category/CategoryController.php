@@ -52,7 +52,12 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $category = $category->posts;
+        
+        foreach($category->posts as $post)
+        {
+            $post->user;
+            $post->categories;
+        }
 
         return response()->json([
             'status' => Status::SUCCESS,

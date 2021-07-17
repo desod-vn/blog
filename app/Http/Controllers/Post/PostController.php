@@ -75,8 +75,11 @@ class PostController extends Controller
 
         foreach($post->comments as $comment)
         {
-            $comment->replies;
+            $comment->user;
+            foreach($comment->replies as $reply)
+                $reply->user;
         }
+
 
         return response()->json([
             'status' => Status::SUCCESS,

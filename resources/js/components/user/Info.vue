@@ -26,7 +26,7 @@
         </div>
         <div class="border-bottom p-2 mt-1">
             <b-icon icon="clock-fill" />
-            <b>Cập nhật lần cuối:</b> {{ moment(getUserInfo.updated_at, "YYYYMMDD").locale('vi').fromNow() }}
+            <b>Cập nhật lần cuối:</b> {{ moment(getUserInfo.updated_at).locale('vi').fromNow() }}
         </div>
         <div class="border-bottom p-2 mt-1">
             <b-icon icon="star-fill" />

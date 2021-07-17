@@ -19,11 +19,16 @@ import OneUser from '../pages/user/OneUser'
 import UpdateUser from '../pages/user/UpdateUser'
 import PasswordUser from '../pages/user/Password'
 
-// USER
+// POST
 import Post from '../pages/post/Index'
 import OnePost from '../pages/post/OnePost'
 import UpdatePost from '../pages/post/UpdatePost'
 import CreatePost from '../pages/post/CreatePost'
+
+// CATEGORY
+import Category from '../pages/category/Index'
+import OneCategory from '../pages/category/OneCategory'
+// import AllCategory from '../pages/category/AllCategory'
 
 
 const Router = new VueRouter({
@@ -122,6 +127,34 @@ const Router = new VueRouter({
                         title: 'Tạo bài vỉết mới',
                     }
                 },
+            ]
+        },
+        {
+            path: '/category',
+            component: Category,
+            name: 'category',
+            children: [
+                {
+                    path: ':id-:slug',
+                    component: OneCategory,
+                    name: 'one-category',
+                },
+                // {
+                //     path: 'update/:id',
+                //     component: UpdatePost,
+                //     name: 'update-post',
+                //     meta: {
+                //         title: 'Chỉnh sửa bài viết',
+                //     }
+                // },
+                // {
+                //     path: 'create',
+                //     component: CreatePost,
+                //     name: 'create-post',
+                //     meta: {
+                //         title: 'Tạo bài vỉết mới',
+                //     }
+                // },
             ]
         },
     ],

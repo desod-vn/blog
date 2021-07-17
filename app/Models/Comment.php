@@ -25,7 +25,7 @@ class Comment extends Model
 
     public function replies()
     {
-        return $this->hasMany(Comment::class, 'reply_id');
+        return $this->hasMany(Comment::class, 'reply_id')->latest();
     }
 
 }

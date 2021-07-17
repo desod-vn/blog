@@ -10,7 +10,10 @@
                 </span>
                 <span v-else>
                     <router-link
-                        :to="{name: one.link}"
+                        :to="{
+                            name: one.link,
+                            params: one.params || ''
+                        }"
                         class="text-blue-500 font-normal hover:no-underline"
                     >
                         {{ one.name }}

@@ -1,7 +1,7 @@
 <template>
     <div id="user">
-		<Header />
         <Loading :loadTime="loadTime" />
+		<Header />
         <router-view :key="$route.fullPath" />
 		<Footer />
     </div>
