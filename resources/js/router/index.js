@@ -5,7 +5,7 @@ import VueMeta from 'vue-meta'
 Vue.use(VueMeta)
 Vue.use(VueRouter)
 
-import Home from '../pages/test'
+import Home from '../pages/Home'
 
 // AUTHENTICATION
 import Auth from '../pages/auth/Index'

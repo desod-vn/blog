@@ -29,16 +29,6 @@ const actions = {
             })
     },
 
-    allUser({ commit }, PAGE = 1) {
-        CALL
-            .get(`user?page=${PAGE}`)
-            .then(response => {
-                const result = response.data
-                if (result.status)
-                    commit('SET_USERLIST', result.data.data)
-            })
-    },
-
     updateUser({ commit }, USER) {
         CALL
             .put(`user/${ USER.id }`, USER)

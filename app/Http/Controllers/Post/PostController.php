@@ -23,20 +23,18 @@ class PostController extends Controller
     {
         $post = Post::query();
         
+
         if($request->sort == 'oldest')
-        {
             $post->oldest();
-        }
+        else if($request->sort == 'hottest')
+            $post->orderBy('view', 'desc');
         else
-        {
             $post->latest();
-        }
+
 
         if($request->has('search'))
-        {
             $post->where(['name', 'like', '%' . $request->search . '%'])
                 ->orWhere(['description', 'like', '%' . $request->search . '%']);
-        }
 
         $post = $post->paginate(Status::POST_PER_PAGE);
 
@@ -93,7 +91,6 @@ class PostController extends Controller
         
         $post->fill($request->all());
         $post->slug = Str::slug($request->name, '-');
-
 
         if($request->has('image'))
         {

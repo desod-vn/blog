@@ -15,6 +15,7 @@
                 GỬI
             </button>
         </div>
+
         <div 
             class="row my-3"
             v-for="(comment, index) in comments"
@@ -48,14 +49,16 @@
                     <span class="text-primary">
                         <button 
                             class="form-button"
-                            @click="replyInput = !replyInput"
+                            @click="clickReply(index)"
                         >
-                            <i class="fa fa-reply"></i> Trả lời
+                                <span><i class="fa fa-reply"></i> Trả lời</span>
                         </button>
                     </span>
                 </div>
+
+
                 <Error v-if="errors && type == 'r'" :errors="errors" />
-                <div v-if="replyInput" class="form-reply">
+                <div v-if="replyInput && which == index" class="form-reply">
                     <input
                         class="form-input" 
                         v-model="replyComment"
@@ -66,7 +69,7 @@
                         class="form-button"
                         @click="replyThis(comment.id)"
                     >
-                        Trả lời
+                        TRẢ LỜI
                     </button>
                 </div>
                 <hr />
@@ -134,6 +137,7 @@ export default {
             type: '',
             replyInput: false,
             moment: moment,
+            which: ''
         }
     },
 
@@ -147,17 +151,19 @@ export default {
         },
         
         getPostComment() {
-            this.SET_COMMENT(false)
-            this.send.comment = ''
-            this.replyComment = ''
-            this.$parent.handle()
+            if(this.getPostComment == true) {
+                this.SET_COMMENT(false)
+                this.send.comment = ''
+                this.replyComment = ''
+                this.$parent.handle()
+            }
         }
     },
  
     computed: {
         ...mapGetters([
             'getError',
-            'getPostComment'
+            'getPostComment',
         ])
     },
 
@@ -175,6 +181,10 @@ export default {
                 comment: this.replyComment,
             }
             this.reply(reply)
+        },
+        clickReply(index) {
+            this.which = index
+            this.replyInput = !this.replyInput
         }
         
     }
