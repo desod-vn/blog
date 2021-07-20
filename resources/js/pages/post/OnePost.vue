@@ -211,7 +211,10 @@ export default {
     font-family: 'Times New Roman', Times, serif;
     letter-spacing: 0.25px;
     line-height: 1.5;
-
+}
+.content img {
+    max-width: 100%;
+    height: auto;
 }
 .fit {
     object-fit: cover;

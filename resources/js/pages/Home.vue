@@ -3,8 +3,15 @@
 		<Header />
 		<div class="container">
 			<HotPost />
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-8">
+					<LatestPost />
+				</div>
+				<div class="col-12 col-sm-12 col-md-12 col-lg-4">
+					something...
+				</div>
+			</div>
 			<Carousel />
-			<LatestPost />
 		</div>
 		<Footer />
 	</div>

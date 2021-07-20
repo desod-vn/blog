@@ -36,7 +36,9 @@ class PostController extends Controller
             $post->where(['name', 'like', '%' . $request->search . '%'])
                 ->orWhere(['description', 'like', '%' . $request->search . '%']);
 
-        $post = $post->paginate(Status::POST_PER_PAGE);
+        $post = $post->select('name', 'id', 'slug', 'image', 'description')
+                     ->paginate(Status::POST_PER_PAGE);
+
 
         return response()->json([
             'status' => Status::SUCCESS,
