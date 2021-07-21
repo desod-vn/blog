@@ -78,9 +78,11 @@
 
 <style scoped>
 .title {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     letter-spacing: 2px;
+    text-transform: uppercase;
     padding: 0 0 0 10px;
+    margin-bottom: 3rem;
     border-left: 5px solid #07d107; 
 }
 .fit {

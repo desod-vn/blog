@@ -4,7 +4,7 @@
             <div class="row">
                 <div 
                     class="col-6 mb-5" 
-                    v-for="(post, index) in getNewPost" 
+                    v-for="(post, index) in getNewPost.data" 
                     :key="index">
                 <div class="card card-h">
                     <router-link
@@ -38,14 +38,27 @@
                 </div>
             </div>
         </div>
+        <div class="text-center">
+            <div class="d-flex p-2 justify-content-center">
+            <pagination
+              v-model="page"
+              :records="getNewPost.total"
+              :per-page="getNewPost.per_page"
+              @paginate="getLatestPost"
+              :options="{ texts: { count: '' } }"
+            />
+          </div>
+        </div>
     </section>
 </template>
 
 <style scoped>
 .title {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     letter-spacing: 2px;
+    text-transform: uppercase;
     padding: 0 0 0 10px;
+    margin-bottom: 3rem;
     border-left: 5px solid #07d107; 
 }
 .fit {
@@ -59,13 +72,17 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 
+import Pagination from 'vue-pagination-2'
 export default {
     data(){
         return {
+            page: 1,
             show: false,
         }
     },
-    
+    components: {
+        Pagination,
+    },
     computed: {
         ...mapGetters(['getNewPost'])
     },

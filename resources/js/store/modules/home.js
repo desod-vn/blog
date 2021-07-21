@@ -28,7 +28,7 @@ const actions = {
             .then(response => {
                 const result = response.data
                 if (result.status){
-                    commit('SET_NEWPOST', result.data.data)
+                    commit('SET_NEWPOST', result.data)
                 }
             })
     },
