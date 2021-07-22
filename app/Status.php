@@ -4,7 +4,7 @@ namespace App;
 
 class Status
 {
-    const APP = 'http://localhost:8000/';
+    const APP = '/';
     const SUCCESS = true;
     const FAILURE = false;
 

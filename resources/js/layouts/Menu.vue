@@ -26,15 +26,16 @@
             class="navbar-nav"
             v-else
         >
-            <li class="nav-item" v-if="getUser.role == 'admin'">
+            <li class="nav-item">
                 <router-link 
-                    :to="{ name: 'dashboard' }"
-                    class="nav-link text-decoration-none px-3"            
+                    :to="{ name: 'create-post' }"
+                    class="nav-link text-decoration-none border border-secondary text-white bg-dark px-md-5 rounded-pill"            
                 >
-                    <b-icon icon="gear-wide-connected" />                         
-                    <span class="d-none d-lg-inline-block">Quản trị</span>
+                    <i class="fas fa-plus-circle"></i> 
+                    <span class="d-none d-md-inline"> BÀI VIẾT</span>
                 </router-link>
             </li>
+
             <li class="nav-item mx-3">
                 <b-nav-item-dropdown right>
                     <template #button-content>
@@ -58,7 +59,7 @@
                             }"
                             class="text-decoration-none"            
                         >
-                            <b-icon icon="person-square" /> Trang cá nhân
+                            <i class="fas fa-user-alt"></i> Trang cá nhân
                         </router-link>
                     </b-dropdown-item>
 
@@ -76,7 +77,7 @@
                             }"
                             class="text-decoration-none"            
                         >
-                            <b-icon icon="newspaper" /> Bài viết của bạn
+                            <i class="far fa-newspaper"></i> Bài viết của bạn
                         </router-link>
                     </b-dropdown-item>
 
@@ -94,7 +95,7 @@
                             }"
                             class="text-decoration-none"            
                         >
-                            <b-icon icon="chat-dots-fill" /> Bình luận của bạn
+                            <i class="fas fa-comments"></i> Bình luận của bạn
                         </router-link>
                     </b-dropdown-item>
 
@@ -103,7 +104,7 @@
                             :to="{ name: 'update-user' }"
                             class="text-decoration-none"            
                         >
-                            <b-icon icon="person-lines-fill" /> Thay đổi thông tin
+                            <i class="fas fa-user-cog"></i> Thay đổi thông tin
                         </router-link>
                     </b-dropdown-item>
                     <b-dropdown-item>
@@ -111,7 +112,7 @@
                             :to="{ name: 'change-password' }"
                             class="text-decoration-none"
                         >
-                            <b-icon icon="key-fill" /> Đổi mật khẩu
+                            <i class="fas fa-lock"></i> Đổi mật khẩu
                         </router-link>
                     </b-dropdown-item>
                         <hr />
@@ -120,20 +121,12 @@
                             :to="{ name: 'logout' }"
                             class="text-decoration-none"            
                         >
-                            <b-icon icon="arrow-left-circle" /> Đăng xuất
+                            <i class="fas fa-sign-out-alt"></i> Đăng xuất
                         </router-link>
                     </b-dropdown-item>
                 </b-nav-item-dropdown>
             </li>
-            <li class="nav-item">
-                <router-link 
-                    :to="{ name: 'create-post' }"
-                    class="nav-link text-decoration-none border border-secondary text-white bg-dark px-md-5 rounded-pill"            
-                >
-                    <b-icon icon="plus-circle-fill" /> 
-                    <span class="d-none d-md-inline">Viết bài</span>
-                </router-link>
-            </li>
+
         </ul>
     </div>
 </template>

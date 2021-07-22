@@ -20,14 +20,17 @@
                         width="100%"
                         class="fit d-block"
                     />
-                    <div class="h2 mt-2 mb-5 text-dark font-weight-bold">
+                    <div class="h2 mt-2 text-dark">
                         {{ getHotPost[0].name }}
                     </div>
                 </router-link>
+                <p class="m-2 small">
+                    {{ getHotPost[0].description ? getHotPost[0].description.substr(0, 150) + '...' : '' }}
+                </p>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-8">
                 <div 
-                    v-for="(post, index) in getHotPost.slice(1,4)"
+                    v-for="(post, index) in getHotPost.slice(1,5)"
                     :key="index"
                     class="mb-3"
                 >
@@ -82,7 +85,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     padding: 0 0 0 10px;
-    margin-bottom: 3rem;
+    margin: 3rem 0;
     border-left: 5px solid #07d107; 
 }
 .fit {

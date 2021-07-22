@@ -10,7 +10,7 @@
                     name: 'one-category',
                     params: { id: category.id, slug: category.slug }
                 }"
-                class="text-uppercase text-decoration-none font-weight-bold"
+                class="text-uppercase text-decoration-none"
             >
                 {{ category.name }}
             </router-link>

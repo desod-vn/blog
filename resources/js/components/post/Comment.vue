@@ -1,5 +1,5 @@
 <template>
-    <div class="border mt-5 p-3">
+    <div class="border mt-5 p-3" v-if="getStatus">
         <Error v-if="errors && type == 'c'" :errors="errors" />
         <div class="form-comment">
             <input
@@ -162,6 +162,7 @@ export default {
  
     computed: {
         ...mapGetters([
+            'getStatus',
             'getError',
             'getPostComment',
         ])

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import VueMeta from 'vue-meta'
 
 Vue.use(VueMeta)
+
 Vue.use(VueRouter)
 
 import Home from '../pages/Home'
@@ -28,7 +29,6 @@ import CreatePost from '../pages/post/CreatePost'
 // CATEGORY
 import Category from '../pages/category/Index'
 import OneCategory from '../pages/category/OneCategory'
-// import AllCategory from '../pages/category/AllCategory'
 
 
 const Router = new VueRouter({
@@ -139,29 +139,12 @@ const Router = new VueRouter({
                     component: OneCategory,
                     name: 'one-category',
                 },
-                // {
-                //     path: 'update/:id',
-                //     component: UpdatePost,
-                //     name: 'update-post',
-                //     meta: {
-                //         title: 'Chỉnh sửa bài viết',
-                //     }
-                // },
-                // {
-                //     path: 'create',
-                //     component: CreatePost,
-                //     name: 'create-post',
-                //     meta: {
-                //         title: 'Tạo bài vỉết mới',
-                //     }
-                // },
             ]
         },
     ],
     scrollBehavior (to, from, savedPosition) {
         return { x: 0, y: 0 }
     }
-
 })
 
 Router.beforeEach((to, from, next) => {

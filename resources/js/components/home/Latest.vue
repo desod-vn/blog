@@ -58,14 +58,11 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     padding: 0 0 0 10px;
-    margin-bottom: 3rem;
+    margin: 3rem 0;
     border-left: 5px solid #07d107; 
 }
 .fit {
     object-fit: cover;
-}
-.card-h {
-    height: 300px;
 }
 </style>
 

@@ -1,39 +1,42 @@
 <template>
-    <nav class="navbar bg-light-blue navbar-light navbar-expand mb-5">
-    <div class="container">
-        <div class="nav-brand">
-            <router-link :to="{ name: 'home' }">
-                <img src="/images/logo.png" alt="" class="d-block d-lg-none"/>
-                <img src="/images/logo-main.png" alt="" class="d-none d-lg-block"/>
-            </router-link>
-            
-        </div>
+    <header>
+        <nav class="navbar bg-light-blue navbar-light navbar-expand">
+            <div class="container">
 
-        <div class="form-search d-none d-md-flex">
-            <input class="form-input" placeholder="Tìm kiếm bài viết" />
-            <button type="submit" class="form-button">
-                <b-icon icon="search" />
-            </button>
-        </div>
+                <div class="nav-brand">
+                    <router-link :to="{ name: 'home' }">
+                        <img src="/images/logo.png" alt="" class="d-block d-lg-none"/>
+                        <img src="/images/logo-main.png" alt="" class="d-none d-lg-block"/>
+                    </router-link>
+                </div>
 
-        <div class="d-md-none d-inline">
-            <span 
-                class="btn btn-outline-dark"
-                @click="show = !show"
-            >
-                <b-icon icon="search" />
-            </span>
-            <div class="position-absolute form-md-search" v-if="show">
-                <input class="form-md-input" placeholder="Tìm kiếm bài viết" />
-                <button type="submit" class="form-md-button">
-                    <b-icon icon="search" />
-                </button>
+                <div class="form-search d-none d-md-flex">
+                    <input class="form-input" placeholder="Search" />
+                    <button type="submit" class="form-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <div class="d-md-none d-inline">
+                    <span 
+                        class="text-dark"
+                        @click="show = !show"
+                    >
+                        <i class="fas fa-search"></i>
+                    </span>
+
+                    <div class="form-md-search" v-if="show">
+                            <input class="form-input" placeholder="Search" />
+                            <button type="submit" class="form-button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                    </div>
+                </div>
+
+                <Menu :getUser="getUser" :getStatus="getStatus"/>
             </div>
-        </div>
-
-        <Menu :getUser="getUser" :getStatus="getStatus"/>
-    </div>
-  </nav>
+        </nav>
+    </header>
 </template>
 
 <script>
@@ -74,9 +77,18 @@ export default {
 </script>
 
 <style scoped>
+header {
+    margin-bottom: 6rem;
+}
 .bg-light-blue {
     color: #fff;
-    border-bottom: 1px dashed #ccc;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: white;
+    border-bottom: 1px solid #ccc;
 }
 .form-search {
     display: flex;
@@ -86,25 +98,21 @@ export default {
     flex-direction:row;
 }
 .form-md-search {
-    border: 1px solid #ccc;
-    margin: 10px 10px;
-    background: white;
-    box-shadow: 3px 3px 10px #000;
+    position: absolute;
     left: 0;
-    z-index: 1;
-    display: block;
-    padding: 3px;
+    right: 0;
+    bottom: 1;
+    margin: 1rem 0;
+    background: white;
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    flex-direction:row;
 }
 .form-input {
     flex-grow: 2;
     padding: 5px;
     border: none;
-}
-.form-md-input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    padding: 5px;
 }
 .form-input:focus {
     outline: none;
@@ -113,17 +121,5 @@ export default {
     background: transparent;
     border: none;
     color:black;
-}
-.form-md-input:focus {
-    outline: none;
-}
-.form-md-button {
-    width: 100%;
-    margin-top: 5px;
-    padding: 5px;
-    text-align: center;
-    background: #2C3E50;
-    border: none;
-    color:white;
 }
 </style>

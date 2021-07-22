@@ -1,5 +1,5 @@
 const axios = require('axios');
-const apiUrl = 'http://localhost:8000/api/';
+const apiUrl = '/api/';
 
 export default {
 	getHeaders(){

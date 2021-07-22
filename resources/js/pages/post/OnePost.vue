@@ -3,37 +3,16 @@
         <CategoryList :categories="getPost.categories" />
         <div class="col-12">
             <div class="h1 title m-3">{{ getPost.name }}</div>
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <router-link 
-                        :to="{ 
-                            name: 'one-user',
-                            params: {
-                                id: getPost.user.id,
-                                slug: getPost.user.slug
-                            } 
-                        }"
-                        class="text-decoration-none text-dark font-weight-bold"            
-                    >
-                        <img 
-                            height="40px"
-                            width="40px"
-                            :src="getPost.user.avatar || '/images/default-thumb.png'" 
-                            class="fit rounded-circle mr-2" 
-                            alt="" 
-                        />
-                        {{ getPost.user.fullname }}
-                    </router-link>
-                    đăng cách đây 
-                    {{ moment(getPost.created_at).locale('vi').fromNow() }}
-                </div>
-                <div>
-                    <b-icon icon="eye-fill" /> {{ getPost.view }} lượt xem
-                </div>
+            
+            <div class="small">
+                <i class="fas fa-clock"></i> 
+                {{ moment(getPost.created_at).locale('vi').format("HH:MM DD/MM/YYYY") }}
+                <br />
+                <i class="fas fa-eye"></i>  {{ getPost.view }} <span class="d-none d-md-inline">lượt xem</span>
             </div>
         </div>
         <div class="col-12">
-            <div class="ml-lg-5 my-5 content">
+            <div class="my-3 content">
                 <p>{{ getPost.description }}</p>
                 <img 
                     height="300px"
@@ -206,7 +185,7 @@ export default {
 }
 .content {
     font-size: 1.25rem;
-    padding: 20px;
+    padding: 10px;
     text-indent: 10px;
     font-family: 'Times New Roman', Times, serif;
     letter-spacing: 0.25px;

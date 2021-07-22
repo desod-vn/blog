@@ -37,7 +37,7 @@
 							<i class="fas fa-gem me-3"></i> DESOD
 						</h6>
 						
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem reiciendis ut, id ipsum aperiam quas dolorum dolorem eligendi provident vero numquam itaque repudiandae minus quaerat quia sapiente suscipit, ad fugiat.</p>
+						<p></p>
 					</div>
 
 					<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mx-auto">

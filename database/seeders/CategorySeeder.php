@@ -24,8 +24,8 @@ class CategorySeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Ẩm thực',
-            'slug' => Str::slug('Ẩm thực'),
+            'name' => 'Cuộc sống',
+            'slug' => Str::slug('Cuộc sống'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -59,8 +59,8 @@ class CategorySeeder extends Seeder
         ]);
 
         DB::table('categories')->insert([
-            'name' => 'Tiếng anh',
-            'slug' => Str::slug('Tiếng anh'),
+            'name' => 'Truyện ma',
+            'slug' => Str::slug('Truyện ma'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -68,6 +68,27 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             'name' => 'Tình yêu',
             'slug' => Str::slug('Tình yêu'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Tâm sự',
+            'slug' => Str::slug('Tâm sự'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Chia sẻ',
+            'slug' => Str::slug('Chia sẻ'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        DB::table('categories')->insert([
+            'name' => 'Thử thách',
+            'slug' => Str::slug('Thử thách'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
